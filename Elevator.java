@@ -28,7 +28,7 @@ public class Elevator {
   public String move() {
     // base case terminates the recursive call when there are no more stops
     if (!this.areStops(this.passengers)) {
-      return this.toString();
+      return "";
     }
 
     if (this.currentFloor == 7) {
@@ -60,6 +60,13 @@ public class Elevator {
       this.passengers[floor - 1][1] = 1;
     }
     return;
+  }
+
+  public String summonElevator(int floor) {
+    if (this.passengers[floor - 1][1] == 0) {
+      this.passengers[floor - 1][1] = 1;
+    }
+    return this.move();
   }
 
   private int offBoardPassengers() {
