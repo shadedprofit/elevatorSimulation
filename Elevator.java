@@ -22,21 +22,14 @@ public class Elevator {
     this.currentFloor = 1;
     this.direction = "up";
     this.totalPassengers = 0;
-    this.passengers = new int[][]{{0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}};
+    this.passengers = new int[7][2];
   }
 
-  public void move() {
-    // char stops = 'n';
-    // for (int i = 0; i < this.passengers.length; i++) {
-    //   if (this.passengers[i][1] == 1) {
-    //     stops = 'y';
-    //   }
-    // }
-
-    // // base case for when there are no more stops to make
-    // if (stops == 'y') {
-    //   return;
-    // }
+  public String move() {
+    // base case terminates the recursive call when there are no more stops
+    if (!this.areStops(this.passengers)) {
+      return this.toString();
+    }
 
     if (this.currentFloor == 7) {
       this.direction = "down";
@@ -57,8 +50,7 @@ public class Elevator {
       this.offBoardPassengers();
     } 
 
-    // this.move();
-    return;
+    return this.toString() + " \n" + this.move();
   }
 
   public void boardPassenger(int floor) {
@@ -71,11 +63,22 @@ public class Elevator {
   }
 
   private int offBoardPassengers() {
-      int offBoardingPassengers = this.passengers[this.currentFloor - 1][0];
-      this.totalPassengers -= offBoardingPassengers;
-      this.passengers[this.currentFloor - 1][0] = 0;
-      this.passengers[this.currentFloor - 1][1] = 0;
-      return offBoardingPassengers;
+    int offBoardingPassengers = this.passengers[this.currentFloor - 1][0];
+    this.totalPassengers -= offBoardingPassengers;
+    this.passengers[this.currentFloor - 1][0] = 0;
+    this.passengers[this.currentFloor - 1][1] = 0;
+    return offBoardingPassengers;
+  }
+
+  private boolean areStops(int[][] passengerList) {
+    boolean result = false;
+    for (int i = 0; i < passengerList.length; i++) {
+      if (passengerList[i][1] == 1) {
+        result = true;
+        break;
+      }
+    }
+    return result;
   }
 
   public String toString() {

@@ -9,14 +9,16 @@ class ElevatorTest {
     elevator1.boardPassenger(5);
     // elevator1.boardPassenger(7);
 
+    System.out.println(elevator1.toString());
+    System.out.println(elevator1.move());
     
-    for (int i = 1; i < 13; i++) {
-      System.out.println(elevator1.toString());
-      elevator1.move();
+    // for (int i = 1; i < 13; i++) {
+      // System.out.println(elevator1.toString());
+      // System.out.println(elevator1.move());
       // if (i == 7) {
       //   elevator1.boardPassenger(1);
       // }
-    }
-    System.out.println(elevator1.toString());
+    // }
+    // System.out.println(elevator1.toString());
   }
 }
