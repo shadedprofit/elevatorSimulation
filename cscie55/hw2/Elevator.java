@@ -1,7 +1,5 @@
 package cscie55.hw2;
 
-import java.io.*;
-
 public class Elevator {
 
   // for data encapsulation, most fields will be private
@@ -19,7 +17,7 @@ public class Elevator {
   private String direction;
 
 
-  public static final int CAPACITY = 10;
+  private static final int CAPACITY = 10;
   
   // the constructor
   public Elevator(Building building) {
@@ -30,95 +28,94 @@ public class Elevator {
     this.currentFloor = 1;
   }
 
-  public void move() {
+  private void move() {
     // before elevator moves, anyone gets off that needs to do so
-    if ((this.passengers[this.currentFloor - 1][1] == 1)) {
-      if (this.passengers[this.currentFloor - 1][0] > 0) {
+    if ((passengers[currentFloor - 1][1] == 1)) {
+      if (passengers[currentFloor - 1][0] > 0) {
         this.offBoardPassengers();
       }
       // if there are no longer any passengers, remove the flag for the elevator to stop on that floor
-      if (this.passengers[this.currentFloor - 1][0] == 0) {
-        this.passengers[this.currentFloor - 1][1] = 0;
+      if (passengers[currentFloor - 1][0] == 0) {
+        passengers[currentFloor - 1][1] = 0;
       }
     }
 
     // if people are waiting to get on the elevator, they get on
-    int passengersWaiting = this.building.floor(this.currentFloor).passengersWaiting();
-    if (this.currentFloor >= 2) {
+    int passengersWaiting = building.floor(currentFloor).passengersWaiting();
+    if (currentFloor >= 2) {
       for (int i = 0; i < passengersWaiting; i++) {
         // change later when every passenger is not bound for the 1st floor
         try {
           this.boardPassenger(1); // replace one with variable from passenger class
-        } catch (cscie55.hw2.ElevatorFullException e) {
+        } catch (ElevatorFullException e) {
           e.printStackTrace();
         }
       }
     }
+    System.out.println("Current floor: " + String.valueOf(currentFloor) + ", Passengers: " + String.valueOf(totalPassengers));
+
     // base case terminates the recursive call when there are no more stops
-    if (!this.areStops(this.passengers)) {
+    if (!this.areStops(passengers)) {
       return;
     }
-    System.out.println("Current floor: " + String.valueOf(this.currentFloor) + ", Passengers: " + String.valueOf(this.totalPassengers));
 
-    if (this.currentFloor == 7) {
-      this.direction = "down";
+    if (currentFloor == 7) {
+      direction = "down";
     }
 
-    if (this.currentFloor == 1) {
-      this.direction = "up";
+    if (currentFloor == 1) {
+      direction = "up";
     }
 
-    if (this.direction == "up") {
-      this.currentFloor++;
+    if (direction == "up") {
+      currentFloor++;
     } else {
-      this.currentFloor--;
+      currentFloor--;
     }
 
     this.move();
   }
 
   public void boardPassenger(int destinationFloorNumber) throws ElevatorFullException {
-    if (this.totalPassengers < CAPACITY) {
-      this.passengers[destinationFloorNumber - 1][0]++;
-      this.totalPassengers++;
-      this.building.floor(this.currentFloor).removePassenger();
-      if (this.passengers[destinationFloorNumber - 1][1] == 0) {
-        this.passengers[destinationFloorNumber - 1][1] = 1;
+    if (totalPassengers < CAPACITY) {
+      passengers[destinationFloorNumber - 1][0]++;
+      totalPassengers++;
+      building.floor(this.currentFloor).removePassenger();
+      if (passengers[destinationFloorNumber - 1][1] == 0) {
+        passengers[destinationFloorNumber - 1][1] = 1;
       }
-      System.out.println("Passenger boarded, total in elevator is " + String.valueOf(this.totalPassengers));
-      return;
+      System.out.println("Passenger boarded, total in elevator is " + String.valueOf(totalPassengers));
     } else {
        throw new ElevatorFullException("Elevator is full!");
     }
   }
 
   public void summonElevator(int floor) {
-    if (this.passengers[floor - 1][1] == 0) {
-      this.passengers[floor - 1][1] = 1;
+    if (passengers[floor - 1][1] == 0) {
+      passengers[floor - 1][1] = 1;
     }
     this.move();
   }
 
   public int currentFloor() {
-    return this.currentFloor;
+    return currentFloor;
   }
 
   public int passengers() {
-    return this.totalPassengers;
+    return totalPassengers;
   }
 
-  private int offBoardPassengers() {
-    int offBoardingPassengers = this.passengers[this.currentFloor - 1][0];
-    this.totalPassengers -= offBoardingPassengers;
-    this.passengers[this.currentFloor - 1][0] = 0;
-    this.passengers[this.currentFloor - 1][1] = 0;
-    return offBoardingPassengers;
+  private void offBoardPassengers() {
+    int offBoardingPassengers = passengers[currentFloor - 1][0];
+    totalPassengers -= offBoardingPassengers;
+    passengers[currentFloor - 1][0] = 0;
+    passengers[currentFloor - 1][1] = 0;
   }
 
   private boolean areStops(int[][] passengerList) {
     boolean result = false;
-    for (int i = 0; i < passengerList.length; i++) {
-      if (passengerList[i][1] == 1) {
+    for (int[] aPassengerList : passengerList) {
+      if (aPassengerList[1] == 1) {
         result = true;
         break;
       }

@@ -7,18 +7,18 @@ public class Building {
   private static final int numFloors = 7;
 
   public Building() {
-    this.elevator = new Elevator(this);
-    for (int i = 0; i < this.numFloors; i++) {
-      this.floors[i] = new Floor(this, i + 1);
+    elevator = new Elevator(this);
+    for (int i = 0; i < numFloors; i++) {
+      floors[i] = new Floor(this, i + 1);
     }
   }
 
   public Elevator elevator() {
-    return this.elevator;
+    return elevator;
   }
 
   public Floor floor(int floorNumber) {
-    return this.floors[floorNumber - 1];
+    return floors[floorNumber - 1];
   }
 
 }
