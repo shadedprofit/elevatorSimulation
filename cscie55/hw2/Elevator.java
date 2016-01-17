@@ -3,7 +3,6 @@ package cscie55.hw2;
 public class Elevator {
 
   // for data encapsulation, most fields will be private
-  private int currentFloor;
 
   // Here we will use a nested array to track passengers bound for a floor and 
   // whether the elevator needs to stop on the floor.
@@ -11,13 +10,14 @@ public class Elevator {
   // representing the number of passengers bound for the floor and the second item indicating
   // whether a stop is required or not.  A '0' will represent no stop and a '1' will
   // represent a stop.
+  private int currentFloor;
   private int[][] passengers;
   private int totalPassengers;
   private Building building;
   private String direction;
 
 
-  private static final int CAPACITY = 10;
+  public static final int CAPACITY = 10;
   
   // the constructor
   public Elevator(Building building) {
@@ -28,8 +28,22 @@ public class Elevator {
     this.currentFloor = 1;
   }
 
-  private void move() {
-    // before elevator moves, anyone gets off that needs to do so
+  public void move() {
+    if (currentFloor == 7) {
+      direction = "down";
+    }
+
+    if (currentFloor == 1) {
+      direction = "up";
+    }
+
+    if (direction == "up") {
+      currentFloor++;
+    } else {
+      currentFloor--;
+    }
+
+    // anyone gets off that needs to do so
     if ((passengers[currentFloor - 1][1] == 1)) {
       if (passengers[currentFloor - 1][0] > 0) {
         this.offBoardPassengers();
@@ -53,27 +67,6 @@ public class Elevator {
       }
     }
     System.out.println("Current floor: " + String.valueOf(currentFloor) + ", Passengers: " + String.valueOf(totalPassengers));
-
-    // base case terminates the recursive call when there are no more stops
-    if (!this.areStops(passengers)) {
-      return;
-    }
-
-    if (currentFloor == 7) {
-      direction = "down";
-    }
-
-    if (currentFloor == 1) {
-      direction = "up";
-    }
-
-    if (direction == "up") {
-      currentFloor++;
-    } else {
-      currentFloor--;
-    }
-
-    this.move();
   }
 
   public void boardPassenger(int destinationFloorNumber) throws ElevatorFullException {
@@ -94,7 +87,6 @@ public class Elevator {
     if (passengers[floor - 1][1] == 0) {
       passengers[floor - 1][1] = 1;
     }
-    this.move();
   }
 
   public int currentFloor() {
@@ -123,13 +115,13 @@ public class Elevator {
     return result;
   }
 
-  // public String toString() {
-  //   String passengerOutput;
-  //   if (this.totalPassengers == 1) {
-  //     passengerOutput = "1 passenger";
-  //   } else {
-  //     passengerOutput = String.valueOf(this.totalPassengers) + " passengers";
-  //   }
-  //   return "Floor " + this.currentFloor + ": " + passengerOutput;
+   public String toString() {
+     String passengerOutput;
+     if (this.totalPassengers == 1) {
+       passengerOutput = "1 passenger";
+     } else {
+       passengerOutput = String.valueOf(this.totalPassengers) + " passengers";
+     }
+     return "Floor " + this.currentFloor + ": " + passengerOutput;
   // }
 }

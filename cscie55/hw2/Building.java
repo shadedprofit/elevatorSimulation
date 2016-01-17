@@ -4,11 +4,12 @@ public class Building {
 
   private Elevator elevator;
   private Floor[] floors = new Floor[7];
-  private static final int numFloors = 7;
+
+  public static final int FLOORS = 7;
 
   public Building() {
     elevator = new Elevator(this);
-    for (int i = 0; i < numFloors; i++) {
+    for (int i = 0; i < FLOORS; i++) {
       floors[i] = new Floor(this, i + 1);
     }
   }
