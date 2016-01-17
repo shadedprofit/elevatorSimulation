@@ -115,13 +115,13 @@ public class Elevator {
     return result;
   }
 
-   public String toString() {
-     String passengerOutput;
-     if (this.totalPassengers == 1) {
-       passengerOutput = "1 passenger";
-     } else {
-       passengerOutput = String.valueOf(this.totalPassengers) + " passengers";
-     }
-     return "Floor " + this.currentFloor + ": " + passengerOutput;
-  // }
+  public String toString() {
+    String passengerOutput;
+    if (this.totalPassengers == 1) {
+      passengerOutput = "1 passenger";
+    } else {
+      passengerOutput = String.valueOf(this.totalPassengers) + " passengers";
+    }
+    return "Floor " + this.currentFloor + ": " + passengerOutput;
+  }
 }
