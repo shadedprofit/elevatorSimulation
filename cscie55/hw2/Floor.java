@@ -12,20 +12,20 @@ public class Floor {
   }
 
   public int passengersWaiting() {
-    return this.passengersWaiting;
+    return passengersWaiting;
   }
 
   public void waitForElevator() {
-    this.passengersWaiting++;
-    this.building.elevator().summonElevator(this.floorNumber);
+    passengersWaiting++;
+    building.elevator().summonElevator(floorNumber);
   }
 
   public void addPassenger() {
-    this.passengersWaiting++;
+    passengersWaiting++;
   }
 
   public void removePassenger() {
-    this.passengersWaiting--;
+    passengersWaiting--;
   }
 
 }  
