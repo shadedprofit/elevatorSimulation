@@ -1,4 +1,4 @@
-package cscie55.hw2;
+package cscie55.hw3;
 
 public class Building {
 
@@ -20,6 +20,10 @@ public class Building {
 
   public Floor floor(int floorNumber) {
     return floors[floorNumber - 1];
+  }
+
+  public void enter(Passenger passenger) {
+    this.floor(1).enterGroundFloor(passenger);
   }
 
 }
