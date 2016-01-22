@@ -23,7 +23,7 @@ public class Building {
   }
 
   public void enter(Passenger passenger) {
-    this.floor(1).enterGroundFloor(passenger);
+    floor(1).enterGroundFloor(passenger);
   }
 
 }

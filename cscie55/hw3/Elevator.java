@@ -36,8 +36,8 @@ public class Elevator {
       currentFloor--;
     }
 
-    if (this.hasStop(currentFloor)) {
-      this.offBoardPassengers();
+    if (hasStop(currentFloor)) {
+      offBoardPassengers();
       Queue<Passenger> passengersWaiting = new LinkedList<Passenger>();
       if (direction.equals("up") || currentFloor == 1) {
         passengersWaiting = building.floor(currentFloor).getPassengerUpQueue();
@@ -48,7 +48,7 @@ public class Elevator {
       int sizeofQueue = passengersWaiting.size();
       for (int i = 0; i < sizeofQueue; i++) {
           try {
-            this.boardPassenger(passengersWaiting.element());
+            boardPassenger(passengersWaiting.element());
           } catch (ElevatorFullException e) {
             e.printStackTrace();
           }
@@ -60,7 +60,7 @@ public class Elevator {
     if (passengers.size() < CAPACITY) {
       passengers.add(p);
       building.floor(currentFloor).removePassengerFromQueue(p);
-      this.summonElevator(p.destinationFloor());
+      summonElevator(p.destinationFloor());
       System.out.println("Passenger boarded, total in elevator is " + String.valueOf(passengers.size()));
     } else {
        throw new ElevatorFullException("Elevator is full!");
@@ -99,7 +99,7 @@ public class Elevator {
     building.floor(currentFloor).makeResidents(toRemove);
     passengers.removeAll(toRemove);
     toRemove.clear();
-    this.checkToRemoveStop();
+    checkToRemoveStop();
   }
 
   private void checkToRemoveStop() {
