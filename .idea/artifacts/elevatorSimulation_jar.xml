@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="elevatorSimulation:jar">
+    <output-path>$PROJECT_DIR$/Edgar_Pabon_CSCIE55_hw1</output-path>
+    <root id="archive" name="elevatorSimulation.jar">
+      <element id="module-output" name="elevatorSimulation" />
+      <element id="file-copy" path="$PROJECT_DIR$/ElevatorTest.java" />
+      <element id="file-copy" path="$PROJECT_DIR$/cscie55/hw1/elevator/Elevator.java" />
+    </root>
+  </artifact>
+</component>

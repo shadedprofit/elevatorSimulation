@@ -28,15 +28,6 @@ public class Elevator {
   }
 
   public void move() {
-    // first check to see if anyone needs to get off at current floor
-    if (passengers[currentFloor - 1][1] == 1) {
-      this.offBoardPassengers();
-    }
-    System.out.println(this.toString());
-    // base case terminates the recursive call when there are no more stops
-    if (!this.areStops(passengers)) {
-      return;
-    }
 
     if (currentFloor == 7) {
       direction = "down";
@@ -52,8 +43,16 @@ public class Elevator {
     } else {
       currentFloor--;
     }
+    // print status of current floor before anyone offboards
+    System.out.println(toString());
 
-    this.move();
+    if (!areStops(passengers)) {
+      return;
+    }
+
+    if (passengers[currentFloor - 1][1] == 1) {
+      offBoardPassengers();
+    }
   }
 
   public void boardPassenger(int floor) {
