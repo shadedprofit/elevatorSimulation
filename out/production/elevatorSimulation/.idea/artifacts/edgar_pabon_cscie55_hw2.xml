@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="edgar_pabon_cscie55_hw2">
+    <output-path>$PROJECT_DIR$/edgar_pabon_cscie55_hw2</output-path>
+    <root id="archive" name="edgar_pabon_cscie55_hw2.jar">
+      <element id="dir-copy" path="$PROJECT_DIR$/cscie55" />
+      <element id="file-copy" path="$PROJECT_DIR$/test/cscie55/hw2test/HW2ElevatorSimulationTest.java" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
